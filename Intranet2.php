@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intranet</title>
-    <link rel="stylesheet" href="actividad.css">
+    <link rel="stylesheet" href="Intranet2.css">
 </head>
 
 
 
 <body>
     <header>
-        <h1>Bienvenido a la intranet de la empresa</h1>
+        <h1>Bienvenido a la intranet de RodBi Technology</h1>
     </header>
     <section>
 
@@ -146,7 +146,7 @@
         ?>
     </section>
     <footer>
-        <p>&copy; <?php echo date("Y"); ?> Intranet de la empresa. Todos los derechos reservados.</p>
+        <p>&copy; <?php echo date("Y"); ?> RodBi Technology. Todos los derechos reservados.</p>
     </footer>
 </body>
 
