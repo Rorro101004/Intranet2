@@ -13,6 +13,7 @@
 <body>
     <header>
         <h1>Bienvenido a la intranet de RodBi Technology</h1>
+        <p><a href="intranet/intranet.php">Ir a la Intranet</a></p>
     </header>
     <section>
         <div id="forms">
