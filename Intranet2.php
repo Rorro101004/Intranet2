@@ -43,43 +43,77 @@
                     <input type="submit" name="login" value="Login">
                 </form>
             </div>
-            <?php
-            session_start();
+                <?php
+                session_start();
 
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                if (isset($_POST['rol'])) {
-                    $_SESSION['rol'] = $_POST['rol'];
-                    echo "<h2>Bienvenido, " . $_POST['rol'] . "</h2>";
-                } elseif (isset($_POST['login'])) {
-                    if (isset($_SESSION['rol'])) {
-                        $rol = $_SESSION['rol'];
-                    } else {
-                        $rol = null;
-                    }
-                    if ($rol == "Alumno") {
-                        echo "<a class='pagina' href='https://es.wikipedia.org/wiki/Sistema_inform%C3%A1tico' target='_blank'>Ir a la página de Alumno</a>";
-                    } elseif ($rol == "Profesor") {
-                        echo "<a class='pagina' href='https://web2.alexiaedu.com/ACWeb/LogOn.aspx?key=%2fNYuvQedqk4%3d' target='_blank'>Ir a la página de Profesor</a>";
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    if (isset($_POST['rol'])) {
+                        $_SESSION['rol'] = $_POST['rol'];
+                        echo "<h2>Bienvenido, " . $_POST['rol'] . "</h2>";
+                    } elseif (isset($_POST['login'])) {
+                        if (isset($_SESSION['rol'])) {
+                            $rol = $_SESSION['rol'];
+                        } else {
+                            $rol = null;
+                        }
+                        if ($rol == "Profesor") {
+                            echo '<form action="" method="post" enctype="multipart/form-data">
+                                <input type="file" name="archivo" accept=".pdf,.doc,.docx" required>
+                                <input type="submit" name="subir" value="Subir archivo">
+                                </form>';
+                        }
                     }
                 }
-            }
+                $rol = $_SESSION['rol'] ?? null;
 
-            ?>
-        </div>
-        <div id="right">
-            <div class="empre">
-                <span>
-                    <h1>Empresas que colaboran con RodBi Technology</h1>
-                </span>
-            </div>
-            <div class="empresas">
-                <img src="NexTech logo.png" alt="Nextech">
-                <img src="microsoft-logo-microsoft-icon-transparent-free-png.webp" alt="Microsoft">
-                <img src="ibm-logo-cru-repair-louis-9.png" alt="IBM">
-                <img src="9fa92ac5a9498502d2707ced798d763fe7490ecc-1600x1026.png" alt="Apple">
-            </div>
-        </div>
+                if ($rol === "Profesor" && !isset($_POST['subir'])) {
+                    echo '<form action="" method="post" enctype="multipart/form-data">
+            <input type="file" name="archivo" accept=".pdf,.doc,.docx" required>
+            <input type="submit" name="subir" value="Subir archivo">
+          </form>';
+                }
 
+
+                if ($rol === "Profesor" && isset($_POST['subir']) && isset($_FILES['archivo'])) {
+                    $tipo = $_FILES["archivo"]["type"];
+                    if ($tipo == "application/pdf" || $tipo == "application/msword" || $tipo == "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+                        $destino = "documentos/" . basename($_FILES["archivo"]["name"]);
+                        if (move_uploaded_file($_FILES["archivo"]["tmp_name"], $destino)) {
+                            echo "<p style='background-color: black;'>Archivo subido correctamente.</p>";
+                        } else {
+                            echo "<p>Error al subir el archivo.</p>";
+                        }
+                    } else {
+                        echo "<p>Solo se permiten archivos PDF o DOC/DOCX.</p>";
+                    }
+                }
+
+
+                echo "<h3 style='background-color: black;'>Documentos disponibles:</h3>";
+                $archivos = glob("documentos/*.{pdf,doc,docx}", GLOB_BRACE);
+                if ($archivos) {
+                    foreach ($archivos as $archivo) {
+                        $nombre = basename($archivo);
+                        echo "<a href='$archivo' download>$nombre</a><br>";
+                    }
+                } else {
+                    echo "<p style='background-color: black;'>No hay documentos disponibles.</p>";
+                }
+                ?>
+            </div>
+            <div id="right">
+                <div class="empre">
+                    <span>
+                        <h1>Empresas que colaboran con RodBi Technology</h1>
+                    </span>
+                </div>
+                <div class="empresas">
+                    <img src="NexTech logo.png" alt="Nextech">
+                    <img src="microsoft-logo-microsoft-icon-transparent-free-png.webp" alt="Microsoft">
+                    <img src="ibm-logo-cru-repair-louis-9.png" alt="IBM">
+                    <img src="9fa92ac5a9498502d2707ced798d763fe7490ecc-1600x1026.png" alt="Apple">
+                </div>
+            </div>
     </section>
     <footer>
         <p>&copy; <?php echo date("Y"); ?> RodBi Technology. Todos los derechos reservados.</p>
