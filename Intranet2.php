@@ -12,7 +12,9 @@
 
 <body>
     <header>
-        <h1>Bienvenido a la intranet de RodBi Technology</h1>
+        <span>
+            <h1>Bienvenido a la intranet de RodBi Technology</h1>
+        </span>
 
     </header>
     <section>
@@ -43,7 +45,6 @@
             </div>
             <?php
             session_start();
-            // Verifica si el formulario ha sido enviado
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (isset($_POST['rol'])) {
@@ -57,10 +58,8 @@
                     }
                     if ($rol == "Alumno") {
                         echo "<a class='pagina' href='https://es.wikipedia.org/wiki/Sistema_inform%C3%A1tico' target='_blank'>Ir a la página de Alumno</a>";
-                        exit();
                     } elseif ($rol == "Profesor") {
                         echo "<a class='pagina' href='https://web2.alexiaedu.com/ACWeb/LogOn.aspx?key=%2fNYuvQedqk4%3d' target='_blank'>Ir a la página de Profesor</a>";
-                        exit();
                     }
                 }
             }
@@ -68,13 +67,16 @@
             ?>
         </div>
         <div id="right">
-            
-            <span><h1>Empresas que colaboran con RodBi Technology</h1></span>
+            <div class="empre">
+                <span>
+                    <h1>Empresas que colaboran con RodBi Technology</h1>
+                </span>
+            </div>
             <div class="empresas">
                 <img src="NexTech logo.png" alt="Nextech">
-                <img src="microsoft-icon-logo-symbol-free-png.webp" alt="Microsoft">
-                <img src="Couleur-logo-IBM.jpg" alt="IBM">
-                <img src="R.jpg" alt="Apple">
+                <img src="microsoft-logo-microsoft-icon-transparent-free-png.webp" alt="Microsoft">
+                <img src="ibm-logo-cru-repair-louis-9.png" alt="IBM">
+                <img src="9fa92ac5a9498502d2707ced798d763fe7490ecc-1600x1026.png" alt="Apple">
             </div>
         </div>
 
