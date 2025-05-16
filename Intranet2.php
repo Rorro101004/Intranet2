@@ -20,16 +20,7 @@
     <section>
         <div id="left">
             <p><a href="intranet/intranet.php">Ir a la Intranet</a></p>
-            <?php
-            if (!isset($_SESSION['rol'])) {
-                echo "<h1>Seleccione un rol antes de iniciar sesión.</h1>";
-            }
-            ?>
             <div id="forms">
-                <form method="post" class="type">
-                    <input type="submit" name="rol" value="Profesor">
-                    <input type="submit" name="rol" value="Alumno">
-                </form>
 
                 <form method="post" class="user">
                     <label for="usuario">
@@ -47,29 +38,21 @@
             session_start();
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                if (isset($_POST['rol'])) {
-                    $_SESSION['rol'] = $_POST['rol'];
-                    echo "<h2>Bienvenido, " . $_POST['rol'] . "</h2>";
-                } elseif (isset($_POST['login'])) {
-                    if (isset($_SESSION['rol'])) {
-                        $rol = $_SESSION['rol'];
-                    } else {
-                        $rol = null;
-                    }
-                    $usuario = $_SERVER['PHP_AUTH_USER']; 
-                    $grupo = shell_exec("groups $usuario");
-                    if (strpos($grupo, "profesores") !== false) {
-                        $rol = "Profesor";
-                        echo '<form action="" method="post" enctype="multipart/form-data">
+                $usuario = $_SERVER['PHP_AUTH_USER'];
+                $grupo = shell_exec("groups $usuario");
+                if (strpos($grupo, "profesores") !== false) {
+                    $rol = "Profesor";
+                    echo '<form action="" method="post" enctype="multipart/form-data">
                     <input type="file" name="archivo" accept=".pdf,.doc,.docx" required>
                     <input type="submit" name="subir" value="Subir archivo">
                     </form>';
-                    } else {
-                        $rol = "Alumno";
-                        echo "<h2>Acceso restringido, solo permiso de lectura</h2>";
-                    }
+                    echo "<h2>Acceso permitido,  permiso de lectura y subida de archivos</h2>";
+                } else {
+                    $rol = "Alumno";
+                    echo "<h2>Acceso restringido, solo permiso de lectura</h2>";
                 }
             }
+
 
             ?>
         </div>
