@@ -9,7 +9,10 @@
     <h1> Intranet Test </h1>
     <?php
     $rol = $_SESSION['rol'] ?? null;
-    
+        echo '<form action="" method="post" enctype="multipart/form-data">
+                    <input type="file" name="archivo" accept=".pdf,.doc,.docx" required>
+                    <input type="submit" name="subir" value="Subir archivo">
+                    </form>';
                 if ($rol === "Profesor" && isset($_POST['subir']) && isset($_FILES['archivo'])) {
                     $tipo = $_FILES["archivo"]["type"];
                     if ($tipo == "application/pdf" || $tipo == "application/msword" || $tipo == "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {

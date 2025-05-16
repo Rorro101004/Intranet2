@@ -1,6 +1,6 @@
 header {
   background-color: #ADD8E6;
-  color: #40E0D0;
+  color: #ffffff;
   padding: 10px;
   text-align: center;
   width: 100%;
@@ -52,7 +52,7 @@ section {
     justify-content: center;
     align-items: center;
     background-color: rgb(192, 192, 192);
-    color: #40E0D0;
+    color: #fafafa;
     border-right: 2px solid #3b3b3b;
     border-top: 2px solid #3b3b3b;
     border-bottom: 2px solid #3b3b3b;
@@ -160,4 +160,7 @@ h1 {
   background-color: black;
   display: inline;
   font-size: 150%;
+}
+h2{
+  color: white;
 }
