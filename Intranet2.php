@@ -40,13 +40,14 @@
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $usuario = $_SERVER['PHP_AUTH_USER'];
                 $grupo = shell_exec("groups $usuario");
-                if (strpos($grupo, "profesores") !== false) {
+                if (strpos($grupo, "profesores")) {
                     $rol = "Profesor";
                     echo '<form action="" method="post" enctype="multipart/form-data">
                     <input type="file" name="archivo" accept=".pdf,.doc,.docx" required>
                     <input type="submit" name="subir" value="Subir archivo">
                     </form>';
                     echo "<h2>Acceso permitido,  permiso de lectura y subida de archivos</h2>";
+                    header("Location: intranet/intranet.php");
                 } else {
                     $rol = "Alumno";
                     echo "<h2>Acceso restringido, solo permiso de lectura</h2>";
