@@ -63,10 +63,10 @@
                 </span>
             </div>
             <div class="empresas">
-                <img src="NexTech logo.png" alt="Nextech">
-                <img src="microsoft-logo-microsoft-icon-transparent-free-png.webp" alt="Microsoft">
-                <img src="ibm-logo-cru-repair-louis-9.png" alt="IBM">
-                <img src="9fa92ac5a9498502d2707ced798d763fe7490ecc-1600x1026.png" alt="Apple">
+                <img src="imagenes/NexTech logo.png" alt="Nextech">
+                <img src="imagenes/microsoft-logo-microsoft-icon-transparent-free-png.webp" alt="Microsoft">
+                <img src="imagenes/ibm-logo-cru-repair-louis-9.png" alt="IBM">
+                <img src="imagenes/9fa92ac5a9498502d2707ced798d763fe7490ecc-1600x1026.png" alt="Apple">
             </div>
         </div>
     </section>
