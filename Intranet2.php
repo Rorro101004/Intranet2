@@ -48,8 +48,11 @@
                     </form>';
                     echo "<h2>Acceso permitido,  permiso de lectura y subida de archivos</h2>";
                     header("Location: intranet/intranet.php");
-                } else {
+                } elseif (strpos($grupo, "alumnos")) {
                     $rol = "Alumno";
+                    echo "<h2>Acceso restringido, solo permiso de lectura</h2>";
+                    header("Location: intranet/intranet.php");
+                } else {
                     echo "<h2>Acceso restringido, solo permiso de lectura</h2>";
                 }
             }
