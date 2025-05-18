@@ -55,11 +55,11 @@ if ($_SESSION['rol'] !== 'Alumno') {
 <body>
     <h1>Documentación disponible para alumnos</h1>
     <?php
-    $archivos = glob("documentos/*.{pdf,doc,docx}", GLOB_BRACE);
+    $archivos = glob(__DIR__ . "/documentos/*.{pdf,doc,docx}", GLOB_BRACE);
     if ($archivos) {
         foreach ($archivos as $archivo) {
             $nombre = basename($archivo);
-            echo "<a href='$archivo' download>$nombre</a><br>";
+            echo "<a href='documentos/$nombre' download>$nombre</a><br>";
         }
     } else {
         echo "<p>No hay documentos disponibles.</p>";
