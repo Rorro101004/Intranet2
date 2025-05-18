@@ -108,6 +108,7 @@ if (!empty($_SESSION['rol'])) {
                 </span>
             </div>
             <div class="empresas">
+                <img class="fluid-bg" src="imagenes/Fluid.png" alt="Fluid background">
                 <img src="imagenes/Brands.png" alt="Brands">
             </div>
         </div>

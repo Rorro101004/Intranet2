@@ -6,7 +6,7 @@
 }
 
 header {
-  background-color: #ffffff;
+  background-color: #e7f1ff;
   color: #ffffff;
   padding: 10px 30px;
   width: 100%;
@@ -106,7 +106,7 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgb(255, 81, 81);
+  background-color: rgb(255, 255, 255);
   color: #fafafa;
 
 }
@@ -121,12 +121,36 @@ section {
 }
 
 .empresas {
+  position: relative;
   margin: 5px;
   align-items: center;
   gap: 10px;
   animation: float 3s ease-in-out infinite;
-
+  display: flex;
+  justify-content: center;
 }
+
+.empresas .fluid-bg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  opacity: 0.4; /* Cambia este valor entre 0 (invisible) y 1 (opaco) */
+  pointer-events: none;
+}
+
+.empresas img:not(.fluid-bg) {
+  position: relative;
+  z-index: 1;
+  max-width: 80%;
+  height: auto;
+}
+
 @keyframes float {
   0% {
     transform: translateY(0);
@@ -139,10 +163,6 @@ section {
   100% {
     transform: translateY(0);
   }
-}
-.empresas img {
-  max-width: 80%;
-  height: auto;
 }
 
 a {
