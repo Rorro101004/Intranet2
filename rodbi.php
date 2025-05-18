@@ -10,20 +10,23 @@ if (isset($_GET['login'])) {
 
     $user = $_SERVER['PHP_AUTH_USER'];
     $htgroup = file_get_contents(__DIR__ . '/intranet/.htgroup');
-    
-error_log("DEBUG: user={$user}");
-error_log("DEBUG: htgroup:\n" . $htgroup);
 
-    if (preg_match('/^grupo_profesores:\\s*.*\b'.preg_quote($user).'\b/m', $htgroup)) {
+    error_log("DEBUG: user={$user}");
+    error_log("DEBUG: htgroup:\n" . $htgroup);
+
+    // Profesores
+    if (preg_match('/^profesores:\s*.*\b' . preg_quote($user) . '\b/mi', $htgroup)) {
         $_SESSION['rol'] = 'Profesor';
         header('Location: intranet/intranet.php');
         exit;
     }
-    if (preg_match('/^grupo_alumnos:\\s*.*\b'.preg_quote($user).'\b/m', $htgroup)) {
+    // Alumnos
+    if (preg_match('/^alumnos:\s*.*\b' . preg_quote($user) . '\b/mi', $htgroup)) {
         $_SESSION['rol'] = 'Alumno';
         header('Location: intranet/alumnos.php');
         exit;
     }
+
 
     header('Location: errorAccess.php');
     exit;
