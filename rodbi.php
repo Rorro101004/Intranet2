@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+if (isset($_GET['logout'])) {
+    session_unset();
+    session_destroy();
+    header('Location: rodbi.php');
+    exit;
+}
+
 if (isset($_GET['login'])) {
     if (!isset($_SERVER['PHP_AUTH_USER'])) {
         header('WWW-Authenticate: Basic realm="Intranet RodBi"');
@@ -9,30 +16,38 @@ if (isset($_GET['login'])) {
     }
 
     $user = $_SERVER['PHP_AUTH_USER'];
-    $htgroup = file_get_contents(__DIR__ . '/intranet/.htgroup');
 
-    error_log("DEBUG: user={$user}");
-    error_log("DEBUG: htgroup:\n" . $htgroup);
+    $htgroup = @file_get_contents(__DIR__ . '/intranet/.htgroup');
+    if ($htgroup === false) {
+        exit("Error leyendo configuración de grupos.");
+    }
 
-    // Profesores
-    if (preg_match('/^profesores:\s*.*\b' . preg_quote($user) . '\b/mi', $htgroup)) {
+    if (preg_match('/^profesores:\s*.*\b' . preg_quote($user, '/') . '\b/mi', $htgroup)) {
         $_SESSION['rol'] = 'Profesor';
         header('Location: intranet/intranet.php');
         exit;
     }
-    // Alumnos
-    if (preg_match('/^alumnos:\s*.*\b' . preg_quote($user) . '\b/mi', $htgroup)) {
+    if (preg_match('/^alumnos:\s*.*\b' . preg_quote($user, '/') . '\b/mi', $htgroup)) {
         $_SESSION['rol'] = 'Alumno';
         header('Location: intranet/readonly.php');
         exit;
     }
 
-
     header('Location: errorAccess.php');
     exit;
 }
-?>
 
+// 3) Si ya hay sesión activa, redirigimos directamente
+if (!empty($_SESSION['rol'])) {
+    if ($_SESSION['rol'] === 'Profesor') {
+        header('Location: intranet/intranet.php');
+        exit;
+    } elseif ($_SESSION['rol'] === 'Alumno') {
+        header('Location: intranet/readonly.php');
+        exit;
+    }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -71,9 +86,6 @@ if (isset($_GET['login'])) {
         </div>
     </section>
     <footer>
-        <?php if (isset($error)) { ?>
-            <p style="color:red;"><?php echo $error; ?></p>
-        <?php } ?>
         <p>&copy; <?php echo date("Y"); ?> RodBi Technology. Todos los derechos reservados.</p>
     </footer>
 </body>

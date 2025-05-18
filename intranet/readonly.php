@@ -18,5 +18,6 @@ if ($_SESSION['rol'] !== 'Alumno') {
 </head>
 <body>
     <h1>hola alumno</h1>
+    <a href="../rodbi.php?logout=1">Cerrar sesión</a>
 </body>
 </html>

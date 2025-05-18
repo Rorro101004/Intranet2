@@ -51,5 +51,7 @@ if ($_SESSION['rol'] !== 'Profesor') {
                     echo "<p>No hay documentos disponibles.</p>";
                 }
                 ?>
+                <a href="../rodbi.php?logout=1">Cerrar sesión</a>
+
 </body>
 </html>
