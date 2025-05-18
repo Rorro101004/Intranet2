@@ -1,31 +1,29 @@
 <?php
 session_start();
 
-// destruye sesión
+// 1) Logout: destruye sesión y redirige al inicio
 if (isset($_GET['logout'])) {
-    // 1. Destruir sesión PHP
     session_unset();
     session_destroy();
-
-    header('HTTP/1.0 401 Unauthorized');
-    header('WWW-Authenticate: Basic realm="Intranet RodBi"');
-    exit("Sesión cerrada. Vuelve a logarte.");
+    header('Location: rodbi.php');
+    exit;
 }
 
+// Login: al pulsar el botón “Acceder”
 if (isset($_GET['login'])) {
     if (!isset($_SERVER['PHP_AUTH_USER'])) {
         header('WWW-Authenticate: Basic realm="Intranet RodBi"');
         header('HTTP/1.0 401 Unauthorized');
-        exit("Necesitas autenticarte para entrar.");
+        exit;
     }
 
     $user = $_SERVER['PHP_AUTH_USER'];
-
     $htgroup = @file_get_contents(__DIR__ . '/intranet/.htgroup');
     if ($htgroup === false) {
         exit("Error leyendo configuración de grupos.");
     }
 
+    // Detectar rol en .htgroup
     if (preg_match('/^profesores:\s*.*\b' . preg_quote($user, '/') . '\b/mi', $htgroup)) {
         $_SESSION['rol'] = 'Profesor';
         header('Location: intranet/intranet.php');
@@ -41,12 +39,12 @@ if (isset($_GET['login'])) {
     exit;
 }
 
-// 3) Si ya hay sesión activa, redirigimos directamente
 if (!empty($_SESSION['rol'])) {
     if ($_SESSION['rol'] === 'Profesor') {
         header('Location: intranet/intranet.php');
         exit;
-    } elseif ($_SESSION['rol'] === 'Alumno') {
+    }
+    if ($_SESSION['rol'] === 'Alumno') {
         header('Location: intranet/readonly.php');
         exit;
     }
@@ -71,9 +69,14 @@ if (!empty($_SESSION['rol'])) {
     </header>
     <section>
         <div id="left">
-            <form method="get" action="">
+            <form method="get">
                 <button type="submit" name="login" value="1">Acceder a la Intranet</button>
             </form>
+            <?php if (!empty($_SESSION['rol'])): ?>
+            <form method="get">
+                <button type="submit" name="logout" value="1">Cerrar sesión</button>
+            </form>
+            <?php endif; ?>
         </div>
         <div id="right">
             <div class="empre">
