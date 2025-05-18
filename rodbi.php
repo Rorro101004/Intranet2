@@ -1,12 +1,12 @@
 <?php
 session_start();
-// borrar var dump al terminar todo 
-var_dump(
-    'PHP_AUTH_USER',
-    $_SERVER['PHP_AUTH_USER'] ?? null,
-    'rol en $_SESSION',
-    $_SESSION['rol'] ?? null
-);
+// // borrar var dump al terminar todo 
+// var_dump(
+//     'PHP_AUTH_USER',
+//     $_SERVER['PHP_AUTH_USER'] ?? null,
+//     'rol en $_SESSION',
+//     $_SESSION['rol'] ?? null
+// );
 
 // 1) Logout: destruye sesión y redirige al inicio
 if (isset($_GET['logout'])) {
@@ -76,37 +76,44 @@ if (!empty($_SESSION['rol'])) {
 
 <body>
     <header>
-        <span>
-            <h1>Bienvenido a la intranet de RodBi Technology</h1>
-        </span>
+        <h1>RodBi Technology</h1>
+        <img src="imagenes/rodbiLogoBl.png" alt="rodbilogo">
     </header>
     <section>
         <div id="left">
-            <form method="get">
-                <button type="submit" name="login" value="1">Acceder a la Intranet</button>
-            </form>
-            <?php if (!empty($_SESSION['rol'])): ?>
+            <div class="logo-title">
+                <img src="imagenes/rodbiLogo.png" alt="rodbilogo">
+                <h1 class="about-mini">Welcome to the RodBi intranet</h1>
+            </div>
+            <div class="about-mini">
+                <p>
+                    The RodBi Technology Intranet gives you secure access to key documents and resources, making collaboration with our team simple and efficient.
+                </p>
+            </div>
+            <div class="actions">
                 <form method="get">
-                    <button type="submit" name="logout" value="1">Cerrar sesión</button>
+                    <button type="submit" name="login" value="1">Access the Intranet</button>
                 </form>
-            <?php endif; ?>
+                <?php if (!empty($_SESSION['rol'])): ?>
+                <form method="get">
+                    <button type="submit" name="logout" value="1">Log out</button>
+                </form>
+                <?php endif; ?>
+            </div>
         </div>
         <div id="right">
             <div class="empre">
                 <span>
-                    <h1>Empresas que colaboran con RodBi Technology</h1>
+                    <h1>Companies collaborating with RodBi Technology</h1>
                 </span>
             </div>
             <div class="empresas">
-                <img src="imagenes/NexTech logo.png" alt="Nextech">
-                <img src="imagenes/microsoft-logo-microsoft-icon-transparent-free-png.webp" alt="Microsoft">
-                <img src="imagenes/ibm-logo-cru-repair-louis-9.png" alt="IBM">
-                <img src="imagenes/9fa92ac5a9498502d2707ced798d763fe7490ecc-1600x1026.png" alt="Apple">
+                <img src="imagenes/Brands.png" alt="Brands">
             </div>
         </div>
     </section>
     <footer>
-        <p>&copy; <?php echo date("Y"); ?> RodBi Technology. Todos los derechos reservados.</p>
+        <p>&copy; <?php echo date("Y"); ?> RodBi Technology. All rights reserved.</p>
     </footer>
 </body>
 

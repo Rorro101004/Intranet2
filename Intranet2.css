@@ -1,19 +1,38 @@
+@font-face {
+  font-family: 'Comfortaa';
+  src: url('../fonts/Comfortaa-SemiBold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 header {
-  background-color: #ADD8E6;
+  background-color: #ffffff;
   color: #ffffff;
-  padding: 10px;
-  text-align: center;
+  padding: 10px 30px;
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
-  position: relative;
+  justify-content: center; 
   top: 0;
   height: 5vw;
+  box-sizing: border-box;
+  gap: 20px; 
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.2rem;
+  font-family: 'Comfortaa', Arial, sans-serif;
+}
+
+header img {
+  height: 30px;
+  width: auto;
+  margin-left: 0;
 }
 
 footer {
-  background-color: rgb(192, 192, 192);
+  background-color: rgb(0, 0, 0);
   color: white;
   padding: 10px;
   text-align: center;
@@ -32,135 +51,161 @@ section {
   text-align: center;
   z-index: 100;
   overflow: visible;
-  #left {
-    width: 50%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid #3b3b3b;
-    z-index: 100;
-    background-color: #40E0D0;
-  }
-
-  #right {
-    width: 50%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(192, 192, 192);
-    color: #fafafa;
-    border-right: 2px solid #3b3b3b;
-    border-top: 2px solid #3b3b3b;
-    border-bottom: 2px solid #3b3b3b;
-    margin-bottom: 50; 
-    .empre{
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: end;
-      height: 10%;
-      position: static;
-    }
-    .empresas {
-      height: 90%;
-      display: grid;
-      position: relative;
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(2, 1fr);
-      margin: 5px;
-      align-items: center;
-      gap: 10px;
-
-      img {
-        max-width: 80%;
-       height: auto;
-      }
-    }
-  }
-
-  a {
-    text-decoration: none;
-    color: white;
-    font-size: 2rem;
-    background-color: #007BFF;
-    padding: 10px;
-    border-radius: 5px;
-    margin-top: 10px;
-  }
-
-  input[type="submit"] {
-    background-color: #007BFF;
-    color: #fff;
-    font-size: 1.2rem;
-    padding: 10px 24px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s, transform 0.2s, box-shadow 0.3s;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
-    margin: 10px;
-  }
-
-  label {
-    font-size: 1.5rem;
-    color: #28047c;
-    margin-bottom: 10px;
-  }
-
-  input[type="submit"]:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
-  }
 }
 
-.mes {
-  font-size: 3rem;
+#left {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  background-color: #ffffff;
+  color: white;
+  gap: 28px;
 }
 
-#forms {
+.about-mini {
+  color: black;
+  max-width: 70%;
+}
+
+
+
+.logo-title {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 18px;
+}
 
-  .user {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.logo-title img {
+  height: 15rem;
+  width: auto;
+}
 
-  }
+.logo-title h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: #000000;
+}
 
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  align-items: center;
+}
+
+#right {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 81, 81);
+  color: #fafafa;
 
 }
 
-.pagina {
-  background-color: antiquewhite;
+.empre {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+  height: 10%;
+  position: static;
+}
+
+.empresas {
+  margin: 5px;
+  align-items: center;
+  gap: 10px;
+  animation: float 3s ease-in-out infinite;
+
+}
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+.empresas img {
+  max-width: 80%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  font-size: 2rem;
+  background-color: #007BFF;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+input[type="submit"], button[type="submit"] {
+  background: linear-gradient(90deg, #007BFF 0%, #8f5cff 100%);
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.4s, transform 0.2s, box-shadow 0.3s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  margin: 10px;
+  font-family: 'Comfortaa', Arial, sans-serif;
+}
+
+input[type="submit"]:hover, button[type="submit"]:hover {
+  background: linear-gradient(90deg, #ffe259 0%, #ffa751 100%);
+  color: #222;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+label {
+  font-size: 1.5rem;
+  color: #28047c;
+  margin-bottom: 10px;
 }
 
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color: rgb(192, 192, 192);
   background-size: cover;
   background-position: center;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: 'Comfortaa', Arial, sans-serif;
+}
 
-  p,
-  h1 {
-    font-size: 1.5rem;
-  }
+p,
+h1 {
+  font-size: 1.5rem;
 }
 
 h1 {
-  background-color: black;
   display: inline;
   font-size: 150%;
+  color:black
 }
-h2{
-  color: white;
+
+h2 {
+  color: rgb(0, 0, 0);
 }
+
+/* Eliminados los selectores y reglas anidados innecesarios, 
+así como reglas para formularios de subida, #forms, .user, .pagina, .mes, 
+que no se usan en rodbi.php */
