@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+var_dump(
+    'PHP_AUTH_USER',
+    $_SERVER['PHP_AUTH_USER'] ?? null,
+    'rol en $_SESSION',
+    $_SESSION['rol'] ?? null
+);
+
 // 1) Logout: destruye sesión y redirige al inicio
 if (isset($_GET['logout'])) {
     session_unset();
@@ -73,9 +80,9 @@ if (!empty($_SESSION['rol'])) {
                 <button type="submit" name="login" value="1">Acceder a la Intranet</button>
             </form>
             <?php if (!empty($_SESSION['rol'])): ?>
-            <form method="get">
-                <button type="submit" name="logout" value="1">Cerrar sesión</button>
-            </form>
+                <form method="get">
+                    <button type="submit" name="logout" value="1">Cerrar sesión</button>
+                </form>
             <?php endif; ?>
         </div>
         <div id="right">
