@@ -1,3 +1,14 @@
+<?php
+session_start();
+if (!isset($_SESSION['rol'])) {
+    header('Location: ../rodbi.php');
+    exit;
+}
+if ($_SESSION['rol'] !== 'Profesor') {
+    header('HTTP/1.0 403 Forbidden');
+    exit("Solo profesores.");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
