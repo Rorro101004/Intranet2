@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+// borrar var dump al terminar todo 
 var_dump(
     'PHP_AUTH_USER',
     $_SERVER['PHP_AUTH_USER'] ?? null,
@@ -12,7 +12,13 @@ var_dump(
 if (isset($_GET['logout'])) {
     session_unset();
     session_destroy();
-    header('Location: rodbi.php');
+
+    header('HTTP/1.0 401 Unauthorized');
+    header('WWW-Authenticate: Basic realm="Intranet RodBi"');
+
+    echo '<!DOCTYPE html><html><head>'
+        . '<meta http-equiv="refresh" content="0;url=rodbi.php" />'
+        . '</head><body></body></html>';
     exit;
 }
 
