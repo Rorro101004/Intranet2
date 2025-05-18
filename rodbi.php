@@ -1,11 +1,15 @@
 <?php
 session_start();
 
+// destruye sesión
 if (isset($_GET['logout'])) {
+    // 1. Destruir sesión PHP
     session_unset();
     session_destroy();
-    header('Location: rodbi.php');
-    exit;
+
+    header('HTTP/1.0 401 Unauthorized');
+    header('WWW-Authenticate: Basic realm="Intranet RodBi"');
+    exit("Sesión cerrada. Vuelve a logarte.");
 }
 
 if (isset($_GET['login'])) {
