@@ -9,18 +9,14 @@ if (isset($_GET['login'])) {
     }
 
     $user = $_SERVER['PHP_AUTH_USER'];
-    $pass = $_SERVER['PHP_AUTH_PW'];
+    $htgroup = file_get_contents(__DIR__ . '/intranet/.htgroup');
 
-    // Averiguamos grupos de UNIX
-    $grupos = shell_exec("groups " . escapeshellarg($user));
-
-    // Redirigimos según grupo
-    if (strpos($grupos, 'profesores') !== false) {
+    if (preg_match('/^grupo_profesores:\\s*.*\b'.preg_quote($user).'\b/m', $htgroup)) {
         $_SESSION['rol'] = 'Profesor';
         header('Location: intranet/intranet.php');
         exit;
     }
-    if (strpos($grupos, 'alumnos') !== false) {
+    if (preg_match('/^grupo_alumnos:\\s*.*\b'.preg_quote($user).'\b/m', $htgroup)) {
         $_SESSION['rol'] = 'Alumno';
         header('Location: intranet/alumnos.php');
         exit;
@@ -30,6 +26,7 @@ if (isset($_GET['login'])) {
     exit;
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
