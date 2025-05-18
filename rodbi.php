@@ -10,6 +10,9 @@ if (isset($_GET['login'])) {
 
     $user = $_SERVER['PHP_AUTH_USER'];
     $htgroup = file_get_contents(__DIR__ . '/intranet/.htgroup');
+    
+error_log("DEBUG: user={$user}");
+error_log("DEBUG: htgroup:\n" . $htgroup);
 
     if (preg_match('/^grupo_profesores:\\s*.*\b'.preg_quote($user).'\b/m', $htgroup)) {
         $_SESSION['rol'] = 'Profesor';
