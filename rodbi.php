@@ -23,7 +23,7 @@ if (isset($_GET['login'])) {
     // Alumnos
     if (preg_match('/^alumnos:\s*.*\b' . preg_quote($user) . '\b/mi', $htgroup)) {
         $_SESSION['rol'] = 'Alumno';
-        header('Location: intranet/alumnos.php');
+        header('Location: intranet/readonly.php');
         exit;
     }
 
