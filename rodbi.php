@@ -30,20 +30,6 @@ if (isset($_GET['login'])) {
         exit;
     }
 
-    // var dump begin
-    var_dump(__DIR__ . '/intranet/.htgroup');
-    $htgroup_path = __DIR__ . '/intranet/.htgroup';
-    var_dump($htgroup_path);
-    if (!file_exists($htgroup_path)) {
-        exit("El archivo .htgroup NO existe en esa ruta.");
-    }
-    $htgroup = @file_get_contents($htgroup_path);
-    if ($htgroup === false) {
-        exit("No se pudo leer el archivo .htgroup aunque existe.");
-    }
-    echo "Archivo leído correctamente.<br>";
-    // var dump end 
-    
     $user = $_SERVER['PHP_AUTH_USER'];
     $htgroup = @file_get_contents(__DIR__ . '/intranet/.htgroup');
     if ($htgroup === false) {
